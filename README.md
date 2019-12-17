@@ -1,8 +1,3 @@
-https://popovichchat.herokuapp.com/
-
-
-# vue-chatkit
-
 ## Project setup
 ```
 npm install
