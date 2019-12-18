@@ -25,11 +25,23 @@
 </template>
 
 <script>
+import Pusher from 'pusher-js';
 import { mapActions, mapState, mapGetters } from "vuex";
 import { isTyping } from "../chatkit.js";
 
 export default {
   name: "message-form",
+  beforeMount() {
+    const pusher = new Pusher('4299975ec852b4e16e47', {
+      cluster: 'eu',
+      encrypted: true,
+    });
+
+    const channel = pusher.subscribe('bot');
+    channel.bind('bot-response', data => {
+      this.sendMessage(data.message);
+    });
+  },
   data() {
     return {
       message: ""
@@ -44,6 +56,15 @@ export default {
     async onSubmit() {
       const result = await this.sendMessage(this.message);
       if (result) {
+        /*bot start*/
+        fetch('https://weepbot.herokuapp.com/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            message: this.message
+          }),
+        });
+        /*bot end*/
         this.message = "";
       }
     },
