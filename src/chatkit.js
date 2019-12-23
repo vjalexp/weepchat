@@ -1,3 +1,4 @@
+import Pusher from 'pusher-js';
 import { ChatManager, TokenProvider } from '@pusher/chatkit-client'
 import moment from 'moment'
 import store from './store/index'
@@ -8,6 +9,22 @@ const MESSAGE_LIMIT = Number(process.env.VUE_APP_MESSAGE_LIMIT) || 10;
 
 let currentUser = null;
 let activeRoom = null;
+
+const pusher = new Pusher('4299975ec852b4e16e47', {
+    cluster: 'eu',
+    encrypted: true,
+});
+
+const channel = pusher.subscribe('bot');
+  channel.bind('bot-response', data => {
+    console.log(data);
+    store.commit('addMessage', {
+        name: 'Bot',
+        username: 'bot',
+        text: data.message,
+        date: moment(Date.now()).format('h:mm:ss a D-MM-YYYY')
+    });
+});
 
 async function connectUser(userId) {
   const chatManager = new ChatManager({
