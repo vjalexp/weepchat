@@ -17,7 +17,6 @@ const pusher = new Pusher('4299975ec852b4e16e47', {
 
 const channel = pusher.subscribe('bot');
   channel.bind('bot-response', data => {
-    console.log(data);
     store.commit('addMessage', {
         name: 'Bot',
         username: 'bot',
