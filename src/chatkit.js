@@ -21,7 +21,7 @@ const channel = pusher.subscribe('bot');
         name: 'Bot',
         username: 'bot',
         text: data.message,
-        date: moment(Date.now()).format('h:mm:ss a D-MM-YYYY')
+        date: moment(moment()).locale('ru').format('LLLL')
     });
 });
 
@@ -55,7 +55,7 @@ async function subscribeToRoom(roomId) {
                     name: message.sender.name,
                     username: message.senderId,
                     text: message.text,
-                    date: moment(message.createdAt).format('h:mm:ss a D-MM-YYYY')
+                    date: moment(message.createdAt).locale('ru').format('LLLL')
                 });
             },
             onPresenceChanged: () => {

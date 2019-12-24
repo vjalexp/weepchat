@@ -28,11 +28,12 @@
         </v-list-item-avatar>
 
         <v-list-item-content>
-          <v-list-item-title v-text="user.name"></v-list-item-title>
+          <v-list-item-title class="text-capitalize" v-text="user.name"></v-list-item-title>
         </v-list-item-content>
 
         <v-list-item-icon>
-          <v-icon :color="statusColor(user.presence)">mdi-web {{ user.presence }}</v-icon>
+          <v-icon v-if="user.username !== 'bot'" :color="statusColor(user.presence)">mdi-web {{ user.presence }}</v-icon>
+          <v-icon v-else :color="statusColor('online')">mdi-web {{ user.presence }}</v-icon>
         </v-list-item-icon>
       </v-list-item>
     </v-list>
@@ -56,17 +57,8 @@ export default {
     statusColor(status) {
       return status === "online" ? "green" : "grey";
     },
-    getRandomColor() {
-      let letters = '0123456789ABCDEF';
-      let color = '';
-      for (let i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-      }
-      return color;
-    },
     ava(u) {
-      let c = this.getRandomColor();
-      return `https://eu.ui-avatars.com/api/?color=FFFFFF&name=${u.name}&background=${c}`
+      return `https://eu.ui-avatars.com/api/?color=FFFFFF&name=${u.name}&background=d896ff`
     },
   }
 };
