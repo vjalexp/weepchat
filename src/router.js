@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from './views/Login.vue'
 import ChatDashboard from './views/ChatDashboard.vue'
+import { authGuard } from "./auth/authGuard";
 
 Vue.use(Router)
 
@@ -18,6 +19,7 @@ export default new Router({
       path: '/chat',
       name: 'chat',
       component: ChatDashboard,
+      beforeEnter: authGuard
     }
   ]
 })
