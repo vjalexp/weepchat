@@ -1,10 +1,15 @@
 <template>
 <div>
-    <LoginForm />
-   
+    <h2>Авторизация</h2>
     <div v-if="!$auth.loading">
-      <button v-if="!$auth.isAuthenticated" @click="login">Log in</button>
-      <button v-if="$auth.isAuthenticated" @click="logout">Log out</button>
+      <v-btn small color="primary" v-if="!$auth.isAuthenticated" @click="login">Войдите</v-btn> на сайт чтобы получить инвайт. 
+    </div>
+    <div>
+      Далее введите полученный по инвайту логин в форму ниже: 
+      <LoginForm />
+    </div>
+    <div v-if="!$auth.loading">
+      <v-btn small color="error" v-if="$auth.isAuthenticated" @click="logout">Выйти из профиля</v-btn>
     </div>
 </div>
 </template>

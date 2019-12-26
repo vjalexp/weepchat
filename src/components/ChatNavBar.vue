@@ -8,9 +8,10 @@
 
     <v-spacer></v-spacer>
 
-    <span class="mr-2"><router-link v-if="$auth.isAuthenticated" to="/profile">Profile</router-link></span>
-    <span class="mr-2">{{ user.name }}</span>
-    <v-icon @click="onLogout">mdi-exit-to-app</v-icon>
+    <span class="mr-2"><router-link v-if="!$auth.isAuthenticated" to="/profile"><v-icon>mdi-account</v-icon></router-link></span>
+    <span class="mr-2">{{ user.name }}</span> 
+    <span class="ml-7"><v-icon @click="onLogout">mdi-exit-to-app</v-icon></span>
+    <span class="ml-2">Выход</span> 
   </v-app-bar>
 </template>
 

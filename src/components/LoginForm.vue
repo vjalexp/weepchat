@@ -1,7 +1,5 @@
 <template>
   <div>
-    <h2 class="text-center">Вход в чат</h2>
-    
     <v-form @submit.prevent="onSubmit">
        <v-alert type="error" v-show="hasError">{{ error }} </v-alert>
 
