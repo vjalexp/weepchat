@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from './views/Login.vue'
+import Profile from './views/Profile.vue'
 import ChatDashboard from './views/ChatDashboard.vue'
 import { authGuard } from "./auth/authGuard";
 
@@ -16,10 +17,16 @@ export default new Router({
       component: Login
     },
     {
+      path: "/profile",
+      name: "profile",
+      component: Profile,
+      beforeEnter: authGuard
+    },
+    {
       path: '/chat',
       name: 'chat',
       component: ChatDashboard,
-      beforeEnter: authGuard
+      // beforeEnter: authGuard
     }
   ]
 })
